@@ -38,6 +38,8 @@ namespace rp4video
 
             if (this.Conectar())
                 timer1.Enabled = true;
+
+            axWindowsMediaPlayer1.settings.setMode("loop", true);
         }
 
         private void AccesoForm(string accion)
@@ -86,6 +88,11 @@ namespace rp4video
 
         public void Reproducir(string video)
         {
+            if (video == "0")
+                axWindowsMediaPlayer1.settings.setMode("loop", true);
+            else
+                axWindowsMediaPlayer1.settings.setMode("false", true);
+
             axWindowsMediaPlayer1.URL = ($@"{_mainPath}{video}.mp4").ToLower();
             axWindowsMediaPlayer1.Ctlcontrols.play();
         }
