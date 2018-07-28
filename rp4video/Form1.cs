@@ -23,7 +23,7 @@ namespace rp4video
         private string UltimoVideo { get; set; } = "";
 
         private string _mainPath = @"c:\tmp\WMPlayer\";
-        private string _pathNameScwitcher = @"currentVideo.txt";
+        private string _switcherName = @"currentVideo.txt";
 
         public Form1()
         {
@@ -44,7 +44,7 @@ namespace rp4video
         {
             strBufferIn = accion;
             this.Text = strBufferIn;
-            File.WriteAllText(($"{_mainPath}{_pathNameScwitcher}").ToLower(), strBufferIn);
+            File.WriteAllText(($"{_mainPath}{_switcherName}").ToLower(), strBufferIn);
         }
 
         private void AccesoInterrupcion(string accion)
@@ -93,7 +93,7 @@ namespace rp4video
         private void timer1_Tick(object sender, EventArgs e)
         {
             //leemos el archivo
-            List<string> fileList = File.ReadAllLines(($"{_mainPath}{_pathNameScwitcher}").ToLower()).ToList();
+            List<string> fileList = File.ReadAllLines(($"{_mainPath}{_switcherName}").ToLower()).ToList();
             this.UltimoVideo = fileList.First();
             //validamos si el numero de video a cambiado
             if (this.UltimoVideo != this.video)
@@ -110,7 +110,7 @@ namespace rp4video
         {
             this.Text = axWindowsMediaPlayer1.playState.ToString();
             if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsMediaEnded)
-                File.WriteAllText(($"{_mainPath}{_pathNameScwitcher}").ToLower(), "0");
+                File.WriteAllText(($"{_mainPath}{_switcherName}").ToLower(), "0");
 
             if (axWindowsMediaPlayer1.playState == WMPLib.WMPPlayState.wmppsPlaying)
             {
